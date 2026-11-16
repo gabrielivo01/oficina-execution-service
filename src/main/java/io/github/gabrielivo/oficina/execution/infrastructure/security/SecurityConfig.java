@@ -15,7 +15,8 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(
             HttpSecurity http, SecurityProperties properties, JwtAuthenticationFilter jwtFilter) throws Exception {
-        http.csrf(csrf -> csrf.disable());
+        // CSRF não se aplica: autenticação só por JWT no header Authorization, sem cookie de sessão.
+        http.csrf(csrf -> csrf.disable()); // NOSONAR: API stateless (JWT)
         if (!properties.enabled()) {
             http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
             return http.build();
