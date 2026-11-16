@@ -30,6 +30,8 @@ saem por outbox; comandos duplicados são filtrados por inbox.
   `SPRING_DATASOURCE_USERNAME=oficina`, `SPRING_DATASOURCE_PASSWORD=oficina` e
   `SPRING_RABBITMQ_HOST=localhost`. Fora do perfil `local`, `JWT_SECRET` é obrigatório
   (segredo compartilhado HS256); o perfil `local` usa uma chave exclusiva de desenvolvimento.
+- Porta: 8080 por padrão (a do container no Kubernetes). Rodando junto com o OS Service na mesma máquina, use
+  `SERVER_PORT=8081`, que é a porta esperada pelo environment `local` da collection Postman.
 - Swagger: `/swagger-ui.html`; health: `/actuator/health`.
 - O perfil local usa o gateway RabbitMQ da plataforma e deve ter a topologia versionada em
   `oficina-infra-k8s/local/rabbitmq/definitions.json`.
