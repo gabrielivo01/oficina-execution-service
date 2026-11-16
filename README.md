@@ -59,6 +59,8 @@ local por segredo gerenciado fora do repositório.
 
 ## Qualidade e demonstração
 
-- CI: testes unitários/mockados, ArchUnit, Spotless, JaCoCo e análise SonarCloud; nenhum teste de
-  integração/contêiner é selecionado.
-- Fluxo de demonstração e collection Postman: [documentação da Fase 4 no OS Service](../oficina/README.md#demonstração-e-qualidade).
+- CI (`ci.yml`): `./mvnw verify` (unitários, contexto com H2, `@DataJpaTest`, contrato, ArchUnit, Spotless,
+  JaCoCo ≥ 80%), SonarCloud com Quality Gate e testes de integração (`./mvnw verify -Pintegracao`) num job separado.
+- CD (`cd.yml`): imagem no GHCR, deploy dos 3 serviços num cluster kind e smoke test E2E da Saga.
+- Branch `main` protegida: merge só por pull request com o CI verde.
+- Fluxo de demonstração e collection Postman: [documentação da Fase 4 no OS Service](https://github.com/gabrielivo01/Oficina#demonstração-e-qualidade).
